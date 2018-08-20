@@ -17,31 +17,34 @@ public class SubstringPattern {
 
     int sum = 0;
     int length = X.length();
+    StringBuilder sb = new StringBuilder(X);
+    //    sb.su
 
-    if (length < 3)
+    if (length < 3) {
+
       return sum;
+    }
+
     int counter = 1;
 
     int start = X.length();
     while ((counter * 2) + 1 <= length) {
 
-      //      counter++;
-
       start = length - counter * 2;
       //WYY
-//      System.out.println(X.substring(start, start + counter) + " = " + X.substring(start + counter));
-      if (X.substring(start, start + counter).equals(X.substring(start + counter))) {
+      //      System.out.println(X.substring(start, start + counter) + " = " + X.substring(start + counter));
+      if (sb.subSequence(start, start + counter).equals(X.subSequence(start + counter, length))) {
         sum++;
       }
       //YWY
-//      System.out.println(X.substring(0,counter) + " = " + X.substring(length-counter));
-      if (X.substring(0, counter).equals(X.substring(length - counter))) {
+      //      System.out.println(X.substring(0,counter) + " = " + X.substring(length-counter));
+      if (sb.subSequence(0, counter).equals(sb.subSequence(length - counter, length))) {
         sum++;
       }
 
       //YYW
-//      System.out.println(X.substring(0,counter) + " = " + X.substring(counter,counter+counter));
-      if (X.substring(0, counter).equals(X.substring(counter, counter + counter))) {
+      //      System.out.println(X.substring(0,counter) + " = " + X.substring(counter,counter+counter));
+      if (sb.subSequence(0, counter).equals(sb.subSequence(counter, counter + counter))) {
         sum++;
       }
       counter++;
