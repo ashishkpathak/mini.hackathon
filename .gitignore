@@ -16,6 +16,8 @@ local.properties
 .loadpath
 .recommenders
 
+.idea/eclipseCodeFormatter.xml
+
 # External tool builders
 .externalToolBuilders/
 
