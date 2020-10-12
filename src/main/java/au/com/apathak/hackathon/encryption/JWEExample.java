@@ -78,7 +78,7 @@ public class JWEExample {
     JWTClaimsSet.Builder claimsSetBuilder = new JWTClaimsSet.Builder();
     claimsSetBuilder.claim("userName", "Viva.La.Vida")
         .subject("LL")
-        .audience(Arrays.asList("Harley and Davidson","Triumph","Indian"))
+        .audience(Arrays.asList("Harley-Davidson","Triumph","Indian"))
         .expirationTime(new Date(now.getTime() + 1000 * 60 * 60))
         .notBeforeTime(now)
         .issueTime(now).issuer("Department of Transport");
