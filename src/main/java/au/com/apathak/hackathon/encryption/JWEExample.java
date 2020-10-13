@@ -124,13 +124,8 @@ public class JWEExample {
 
   }
   public static void main(String... args) throws Exception {
-
     loadKeys();
-
     generateJWT();
-
-
-
 
   }
 }
