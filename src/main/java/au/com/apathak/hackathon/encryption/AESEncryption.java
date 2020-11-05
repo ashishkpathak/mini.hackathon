@@ -1,9 +1,12 @@
 package au.com.apathak.hackathon.encryption;
 
 import java.util.Base64;
+import java.util.Random;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+
+import com.sun.xml.internal.rngom.parse.host.Base;
 
 public class AESEncryption {
 
@@ -63,11 +66,21 @@ public class AESEncryption {
   }
 
   public static void main(String[] args) {
-    String encrypt = encrypt("key0key0key0key0", new byte[] { 0x10, 0x12, 0x10, 0x12, 0x10, 0x12, 0x10, 0x12, 0x10, 0x12, 0x10, 0x12, 0x10, 0x12, 0x10, 0x12 }, "Hello");
+    Random random = new Random();
+    byte[] buffer = new byte[16];
+//    "GW5jD9udqRPVjAHea7OkOhchSf8pxgyZ"
+     random.nextBytes(buffer);
+    System.out.printf("%s%n", Base64.getEncoder().encodeToString(buffer));
+    final String plainText ="DATE_TIME,SERVICE_ID,CUSTOMER_EMAIL\n"
+        + "13-Oct-2020 06:10:40,0428462969,kaur4@yopmail.com\n"
+        + "T,1";
+
+
+    String k = "G987999222929212312567j8j5dfg9yZ";
+    String ivBase64Encoded = "Ntq78ytDZ5cwWk8zI6Fv4Q==";
+    String encrypt = encrypt(k, Base64.getDecoder().decode(ivBase64Encoded),plainText);
     System.out.printf("%n%s%n", encrypt);
-    System.out.printf("%n%s%n",decrypt("key0key0key0key0",
-        new byte[] { 0x10, 0x12, 0x10, 0x12, 0x10, 0x12, 0x10, 0x12, 0x10, 0x12, 0x10, 0x12, 0x10, 0x12, 0x10, 0x12 },
-        encrypt));
+    System.out.printf("%n%s%n",decrypt(k, Base64.getDecoder().decode(ivBase64Encoded),encrypt));
   }
 
 }
