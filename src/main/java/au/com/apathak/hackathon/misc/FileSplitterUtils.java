@@ -10,19 +10,10 @@ public class FileSplitterUtils {
 
   public static void main(String... args) throws Exception {
     File file = new File("/tmp/a.txt");
-    boolean exists = file.exists();
-    if (!exists) {
-      return;
-    }
-    long length = file.length();
-    if (length == 0) {
+    if (!file.exists() || file.length() == 0 || !file.canRead()) {
       return;
     }
 
-    boolean b = file.canRead();
-    if (!b) {
-      return;
-    }
     int partition = 50000;
     byte[] buffer = new byte[0x1000];
     BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file), 1024);
@@ -35,7 +26,7 @@ public class FileSplitterUtils {
       if (tread >= partition) {
         bos.close();
         bos = new BufferedOutputStream(new FileOutputStream("/tmp/a.txt." + count++));
-        bos.write(buffer,0,read);
+        bos.write(buffer, 0, read);
         read = bis.read(buffer);
         tread = 0;
       } else {
@@ -44,11 +35,6 @@ public class FileSplitterUtils {
       }
     }
     bos.close();
-
-//    if (tread > 0) {
-//      bos.write(buffer, 0, tread);
-//      bos.close();
-//    }
 
   }
 }
